@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
+    <link rel="stylesheet" href="./css/style.css" type="text/css" />
 
     <title>Scheduler App</title>
 </head>
@@ -32,16 +34,34 @@
         </div>
     </nav>
 
+    <section class="class mt-5 mb-5" id="m105">
+        <div class="container">
+            <h1 class="class-title">Data Dosen</h1>
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Dosen</th>
+                        <th>NIP</th>
+                        <th>ID Fingerpint</th>
+                        <th>Device Ruangan</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </section>
 
 
 
-
+    <script src="./js/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
 
     <script>
         var firebaseConfig = {
@@ -56,7 +76,57 @@
         };
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
+
+
+        var database = firebase.database();
+        var counter = 1;
+
+        database.ref('1/dosen').on('value', snap => {
+            if (snap.val()) {
+                var content = '';
+
+                snap.forEach((data) => {
+                    var val = data.val()
+                    var key = data.key;
+                    console.log(val)
+                    console.log(data.key)
+                    content += '<tbody><tr>';
+                    content += '<td>' + counter + '</td>';
+                    content += '<td>' + val.nama + '</td>';
+                    content += '<td>' + val.nip + '</td>';
+                    content += '<td>' + val.id + '</td>';
+                    content += '<td>' + 'M105' + '</td>';
+                    content += '</tr></tbody>'
+                    counter++;
+                });
+                $('#example').append(content)
+            }
+        })
+
+        database.ref('2/dosen').on('value', snap => {
+            if (snap.val()) {
+                var content = '';
+
+                snap.forEach((data) => {
+                    var val = data.val();
+                    var key = data.key;
+                    console.log(val)
+                    console.log(data.key)
+                    content += '<tbody><tr>';
+                    content += '<td>' + counter + '</td>';
+                    content += '<td>' + val.nama + '</td>';
+                    content += '<td>' + val.nip + '</td>';
+                    content += '<td>' + val.id + '</td>';
+                    content += '<td>' + 'M205' + '</td>';
+                    content += '</tr></tbody>';
+                    counter++;
+                });
+                $('#example').append(content)
+            }
+        })
+
     </script>
+
 </body>
 
 </html>
