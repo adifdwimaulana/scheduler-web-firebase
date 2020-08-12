@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: sans-serif;
+    color: #737373;
+}
+
+nav {
+    margin: 0;
+    font-weight: 600;
+}
+
+.navbar-nav {
+    padding: 8px 0px;
+}
+
+.navbar-nav .nav-item {
+    margin-right: 20px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.class-title {
+    font-size: 24px;
+    margin: 0 0 16px 0;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+}
